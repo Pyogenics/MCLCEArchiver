@@ -67,12 +67,7 @@ namespace Archiver.Core
 
         internal Stream GetSubStream(int offset, int length)
         {
-            // TODO: need to create some SubStream helper or something
-            _stream.Seek(offset, SeekOrigin.Begin);
-            MemoryStream stream = new MemoryStream();
-            _stream.CopyTo(stream, offset);
-            stream.Seek(0, SeekOrigin.Begin);
-
+            SubStream stream = new(_stream, offset, length);
             return stream;
         }
 
