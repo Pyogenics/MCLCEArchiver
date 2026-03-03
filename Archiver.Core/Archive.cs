@@ -3,16 +3,29 @@ using System.Text;
 
 namespace Archiver.Core
 {
-    public class Archive
+    public class Archive : IDisposable
     {
         private readonly Stream _stream;
         private readonly ArchiveMode _mode;
+        private readonly bool _leaveOpen;
+
         public List<ArchiveEntry> Entries { get; } = new List<ArchiveEntry>(); // TODO: make this readonly lol
 
         public Archive(Stream stream, ArchiveMode mode)
         { 
             _stream = stream;
             _mode = mode;
+            _leaveOpen = true;
+            
+            if (_mode == ArchiveMode.Read)
+                ReadHeader();
+        }
+
+        internal Archive(Stream stream, ArchiveMode mode, bool leaveOpen)
+        {
+            _stream = stream;
+            _mode = mode;
+            _leaveOpen = leaveOpen;
 
             if (_mode == ArchiveMode.Read)
                 ReadHeader();
@@ -61,6 +74,11 @@ namespace Archiver.Core
             stream.Seek(0, SeekOrigin.Begin);
 
             return stream;
+        }
+
+        public void Dispose()
+        {
+            if (!_leaveOpen) _stream.Dispose();
         }
     }
 }

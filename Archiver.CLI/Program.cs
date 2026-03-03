@@ -12,12 +12,11 @@ namespace Archiver.CLI
                 Console.WriteLine("Incorrect usage! Please supply a path to an arc file you want to deflate followed by the output folder path.");
             }
 
-            using FileStream fileStream = new(args[0], FileMode.Open);
-            Archive archive = new(fileStream, ArchiveMode.Read);
+            using Archive archive = ArchiveFile.Open(args[0], ArchiveMode.Read);
             foreach (var entry in archive.Entries)
             {
                 // TODO: Handle compressed files, probably not here but inside ArchiverFileEntry?
-                string entryPath = args[1] + "/" + entry.Name;
+                string entryPath = Path.Combine(args[1], entry.Name);
                 Console.WriteLine(entryPath);
                 Directory.CreateDirectory(Path.GetDirectoryName(entryPath));
                 using FileStream outputFileStream = new(entryPath, FileMode.Create);
