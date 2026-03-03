@@ -15,7 +15,6 @@ namespace Archiver.CLI
             using Archive archive = ArchiveFile.Open(args[0], ArchiveMode.Read);
             foreach (var entry in archive.Entries)
             {
-                // TODO: Handle compressed files, probably not here but inside ArchiverFileEntry?
                 string entryPath = Path.Combine(args[1], entry.Name);
                 Console.WriteLine(entryPath);
                 Directory.CreateDirectory(Path.GetDirectoryName(entryPath));
