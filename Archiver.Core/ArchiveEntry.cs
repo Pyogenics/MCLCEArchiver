@@ -1,15 +1,15 @@
 ﻿namespace Archiver.Core
 {
-    public class ArchiveFileEntry
+    public class ArchiveEntry
     {
-        private readonly ArchiveFile _archive;
+        private readonly Archive _archive;
         
         private readonly int _offset;
         public string Name { get; }
         public int Size { get; }
         public bool Compressed { get; }
 
-        internal ArchiveFileEntry(ArchiveFile archive, string name, int offset, int size, bool compressed)
+        internal ArchiveEntry(Archive archive, string name, int offset, int size, bool compressed)
         {
             _archive = archive;
             _offset = offset;

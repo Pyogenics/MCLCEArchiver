@@ -1,6 +1,6 @@
 ﻿namespace Archiver.Core
 {
-    public enum ArchiveFileMode
+    public enum ArchiveMode
     {
         Read,
         Create

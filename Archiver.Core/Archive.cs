@@ -3,18 +3,18 @@ using System.Text;
 
 namespace Archiver.Core
 {
-    public class ArchiveFile
+    public class Archive
     {
         private readonly Stream _stream;
-        private readonly ArchiveFileMode _mode;
-        public List<ArchiveFileEntry> Entries { get; } = new List<ArchiveFileEntry>(); // TODO: make this readonly lol
+        private readonly ArchiveMode _mode;
+        public List<ArchiveEntry> Entries { get; } = new List<ArchiveEntry>(); // TODO: make this readonly lol
 
-        public ArchiveFile(Stream stream, ArchiveFileMode mode)
+        public Archive(Stream stream, ArchiveMode mode)
         { 
             _stream = stream;
             _mode = mode;
 
-            if (_mode == ArchiveFileMode.Read)
+            if (_mode == ArchiveMode.Read)
                 ReadHeader();
         }
 
@@ -41,7 +41,7 @@ namespace Archiver.Core
                     fileName = fileName[1..];
                 }
 
-                ArchiveFileEntry fileEntry = new(
+                ArchiveEntry fileEntry = new(
                     this,
                     Encoding.UTF8.GetString(fileName),
                     fileOffset,

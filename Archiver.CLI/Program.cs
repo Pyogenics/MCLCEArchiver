@@ -13,7 +13,7 @@ namespace Archiver.CLI
             }
 
             using FileStream fileStream = new(args[0], FileMode.Open);
-            ArchiveFile archive = new(fileStream, ArchiveFileMode.Read);
+            Archive archive = new(fileStream, ArchiveMode.Read);
             foreach (var entry in archive.Entries)
             {
                 // TODO: Handle compressed files, probably not here but inside ArchiverFileEntry?
