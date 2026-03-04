@@ -7,5 +7,5 @@ Extremely WIP
 - [x] Basic archive open
 - [ ] Archive create
 - [ ] Archive append (?)
-- [ ] Proper CLI frontend
+- [x] Proper CLI frontend
 - [ ] GUI sometime in the future
